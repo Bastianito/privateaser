@@ -183,10 +183,58 @@ function priceRefresh()
 }
 //End of Step 1 functions
 
+//Step 2 function(s)
 
+function priceCalculationWithDiscount(event_id){
+  let selected_bar;
+  let selected_event;
+
+  for(let j=0; j<events.length; j++){
+    if(events[j].id == event_id){
+      selected_event = events[j];
+    }
+  }
+
+  for(let i=0; i<bars.length; i++)
+  {
+    if (bars[i].id == selected_event.barId){
+      selected_bar=bars[i];
+    }
+  }
+
+
+  let time_price = selected_event.time*selected_bar.pricePerHour;
+
+
+  let person_price = selected_event.persons*selected_bar.pricePerPerson;
+  if(selected_event.persons>60){
+    person_price = person_price/2;
+  }
+  else if (selected_event.persons>20) {
+    person_price = person_price - 0.3*person_price;
+  }
+  else if (selected_event.persons>10) {
+    person_price = person_price - 0.1*person_price;
+  }
+
+  return time_price+person_price;
+}
+
+function priceRefreshWithDiscount()
+{
+  for(let i=0; i<events.length; i++)
+  {
+    events[i].price = priceCalculationWithDiscount(events[i].id);
+  }
+}
+
+
+
+//End of Step 2 functions
 
 
 priceRefresh();
+priceRefreshWithDiscount();
 console.log(bars);
 console.log(events);
 console.log(actors);
