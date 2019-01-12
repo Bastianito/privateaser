@@ -146,6 +146,47 @@ const actors = [{
   }]
 }];
 
+
+//Step 1 functions
+//This function calculate the price of an event, it takes the id as argument
+function priceCalculation(event_id){
+  let selected_bar;
+  let selected_event;
+
+  for(let j=0; j<events.length; j++){
+    if(events[j].id == event_id){
+      selected_event = events[j];
+    }
+  }
+
+  for(let i=0; i<bars.length; i++)
+  {
+    if (bars[i].id == selected_event.barId){
+      selected_bar=bars[i];
+    }
+  }
+
+
+  let time_price = selected_event.time*selected_bar.pricePerHour;
+  let person_price = selected_event.persons*selected_bar.pricePerPerson;
+
+  return time_price+person_price;
+}
+
+//This function refresh the prices for all events
+function priceRefresh()
+{
+  for(let i=0; i<events.length; i++)
+  {
+    events[i].price = priceCalculation(events[i].id);
+  }
+}
+//End of Step 1 functions
+
+
+
+
+priceRefresh();
 console.log(bars);
 console.log(events);
 console.log(actors);
