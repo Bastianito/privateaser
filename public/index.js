@@ -230,11 +230,27 @@ function priceRefreshWithDiscount()
 
 
 
-//End of Step 2 functions
+//End of Step 2 function(s)
 
+//Step 3 function(s)
+
+function commissionCalculation()
+{
+  for(let i=0; i<events.length; i++)
+  {
+    let commission = events[i].price*0.3;
+    events[i].commission.treasury = events[i].persons;
+    events[i].commission.insurance = commission/2;
+    events[i].commission.privateaser = (commission/2)-events[i].persons;
+
+  }
+}
+
+//End of Step 3 functions
 
 priceRefresh();
 priceRefreshWithDiscount();
+commissionCalculation();
 console.log(bars);
 console.log(events);
 console.log(actors);
