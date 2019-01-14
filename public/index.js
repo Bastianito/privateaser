@@ -147,7 +147,7 @@ const actors = [{
 }];
 
 
-//Step 1 functions
+//Step 1 functions :
 //This function calculate the price of an event, it takes the id as argument
 function priceCalculation(event_id){
   let selected_bar;
@@ -183,7 +183,7 @@ function priceRefresh()
 }
 //End of Step 1 functions
 
-//Step 2 function(s)
+//Step 2 function(s) :
 
 function priceCalculationWithDiscount(event_id){
   let selected_bar;
@@ -232,7 +232,7 @@ function priceRefreshWithDiscount()
 
 //End of Step 2 function(s)
 
-//Step 3 function(s)
+//Step 3 function(s) :
 
 function commissionCalculation()
 {
@@ -248,9 +248,31 @@ function commissionCalculation()
 
 //End of Step 3 functions
 
+//Step 4 function(s) :
+
+function calculationWithDeductible()
+{
+  for(let i=0; i<events.length; i++)
+  {
+    if(events[i].options.deductibleReduction)
+    {
+      events[i].price += events[i].persons;
+      events[i].commission.privateaser += events[i].persons;
+    }
+  }
+}
+
+//End of Step 4 functions
+
+
+
+
+
+
 priceRefresh();
 priceRefreshWithDiscount();
 commissionCalculation();
+calculationWithDeductible();
 console.log(bars);
 console.log(events);
 console.log(actors);
