@@ -264,6 +264,44 @@ function calculationWithDeductible()
 
 //End of Step 4 functions
 
+//Step 5 function(s)
+
+function payingTheActors()
+{
+  for(let e = 0; e<events.length; e++)
+  {
+    for(let a = 0; a<actors.length; a++)
+    {
+      if(actors[a].eventId == events[e].id)
+      {
+        for(let p = 0; p < actors[a].payment.length; p++)
+        {
+          if(actors[a].payment[p].who == "booker")
+          {
+            actors[a].payment[p].amount = events[e].price;
+          }
+          if(actors[a].payment[p].who == "bar")
+          {
+            actors[a].payment[p].amount = events[e].price - events[e].commission.insurance - events[e].commission.treasury - events[e].commission.privateaser;
+          }
+          if(actors[a].payment[p].who == "insurance")
+          {
+            actors[a].payment[p].amount = events[e].commission.insurance;
+          }
+          if(actors[a].payment[p].who == "treasury")
+          {
+            actors[a].payment[p].amount = events[e].commission.treasury;
+          }
+          if(actors[a].payment[p].who == "privateaser")
+          {
+            actors[a].payment[p].amount = events[e].commission.privateaser;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 
 
@@ -273,6 +311,7 @@ priceRefresh();
 priceRefreshWithDiscount();
 commissionCalculation();
 calculationWithDeductible();
+payingTheActors();
 console.log(bars);
 console.log(events);
 console.log(actors);
